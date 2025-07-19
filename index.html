@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yangi yil taklifnoma</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      color: white;
+      text-align: center;
+      z-index: 10;
+      max-width: 90%;
+      box-shadow: 0 0 30px rgba(255,255,255,0.1);
+    }
+
+    .card h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 1.2em;
+    }
+
+    .firework {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: transparent;
+      border-radius: 50%;
+      animation: shoot 4s linear forwards;
+      z-index: 5;
+    }
+
+    @keyframes shoot {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(300px);
+        opacity: 1;
+        box-shadow:
+          0 0 20px 10px gold,
+          0 0 40px 20px red,
+          0 0 60px 30px orange,
+          0 0 80px 40px white;
+      }
+      100% {
+        transform: translateY(600px);
+        opacity: 0;
+        box-shadow: none;
+      }
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+  <style>
+  .snowflake {
+    position: fixed;
+    top: -10px;
+    z-index: 2;
+    color: white;
+    font-size: 1em;
+    user-select: none;
+    pointer-events: none;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+  }
+</style>
+
+<script>
+  function createSnowflake() {
+    const snowflake = document.createElement("div");
+    snowflake.classList.add("snowflake");
+    snowflake.textContent = "❄";
+    snowflake.style.left = Math.random() * window.innerWidth + "px";
+    snowflake.style.animationDuration = 5 + Math.random() * 5 + "s";
+    snowflake.style.fontSize = (10 + Math.random() * 20) + "px";
+    document.body.appendChild(snowflake);
+
+    setTimeout(() => {
+      snowflake.remove();
+    }, 10000);
+  }
+
+  setInterval(createSnowflake, 300);
+</script>
+
+</head>
+<body>
+  <div class="card">
+    <h1 style="font-size: 3     vh;">🎉 Yangi Yil Muborak</h1>
+    <p>Sizni 2025-yilga bag‘ishlangan bayramga taklif qilamiz!</p>
+  </div>
+<!-- Modal -->
+<div id="modal" style="
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  display: none;
+">
+  <div style="
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+    max-width: 90%;
+  ">
+    <h2>🎄 Yangi Yil Tabrik!</h2>
+    <p>Okajonim, sizga sog‘lik, omad va baxt tilayman! 🎁</p>
+    <button onclick="closeModal()" style="
+      margin-top: 20px;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 25px;
+      background-color: #ff4081;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+    ">Yopish</button>
+  </div>
+</div>
+
+  <!-- Musiqa -->
+  <audio id="my-audio" src="n.mp3" loop></audio>
+
+  <script>
+    // Modalni ko‘rsatish
+setTimeout(() => {
+  document.getElementById("modal").style.display = "flex";
+}, 4000); // 5 soniyadan keyin chiqar
+
+// Modalni yopish funksiyasi
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+
+    // 🔊 Autoplay trigger (foydalanuvchi interaction bo‘lsa ham)
+    document.addEventListener('click', () => {
+      const music = document.getElementById('my-audio');
+      music.play().catch(() => {});
+    }, { once: true });
+
+    window.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        const music = document.getElementById('my-audio');
+        music.play().catch(() => {});
+      }, 1000);
+    });
+
+    // 🎇 Firework generator
+    function launchFirework() {
+      const firework = document.createElement("div");
+      firework.classList.add("firework");
+      firework.style.left = Math.random() * 100 + "%";
+      firework.style.animationDuration = (3 + Math.random() * 2) + "s";
+      document.body.appendChild(firework);
+
+      setTimeout(() => {
+        firework.remove();
+      }, 5000);
+    }
+
+    setInterval(launchFirework, 1000); // Har 1 sekundda mushak
+  </script>
+</body>
+</html>
